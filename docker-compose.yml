@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db
+    image: postgres:14
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=kenzinho
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=fullstack
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kenzinho -d fullstack"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  api:
+    container_name: backend_api
+    build: ./backend
+    ports:
+      - 8080:8080
+    env_file:
+      - backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: frontend_client
+    build: ./frontend
+    ports:
+      - 3000:3000
