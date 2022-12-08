@@ -1,0 +1,12 @@
+export interface IContantInformationResponse {
+  id: string
+  email: string
+  phone: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface IContantInformationRequest {
+  email: string
+  phone: string
+}
