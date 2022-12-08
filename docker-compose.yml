@@ -6,10 +6,8 @@ services:
     image: postgres:14
     ports:
       - 5431:5432
-    environment:
-      - POSTGRES_USER=kenzinho
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=fullstack
+    env_file:
+      - backend/.env
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U kenzinho -d fullstack"]
       interval: 10s
