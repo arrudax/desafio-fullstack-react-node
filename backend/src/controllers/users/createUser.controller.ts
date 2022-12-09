@@ -13,9 +13,8 @@ const createUserController = async (request: Request, response: Response) => {
     contacts,
     contantInformation,
   });
-  const removedPassword = instanceToPlain(createdUser);
 
-  return response.status(201).json(removedPassword);
+  return response.status(201).json(createdUser);
 };
 
 export default createUserController;
