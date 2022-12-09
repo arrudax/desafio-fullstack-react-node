@@ -11,6 +11,8 @@ import {
   IUserRequest,
   IUserResponse,
 } from "../../interfaces/users/users.interface";
+import { returnedUserData } from "../../utils/returnedData";
+
 
 const createUserService = async ({
   fullName,
@@ -50,23 +52,9 @@ const createUserService = async ({
 
   await contantInformationRepository.save(newContantInformation);
 
-  const returnedUser: IUserResponse = {
-    id: newUser!.id,
-    fullName: newUser!.fullName,
-    contacts: newUser!.contacts,
-    isActive: newUser!.isActive,
-    createdAt: newUser!.createdAt,
-    updatedAt: newUser!.updatedAt,
-    contantInformation: {
-      id: newContantInformation.id,
-      email: newContantInformation!.email,
-      phone: newContantInformation!.phone,
-      createdAt: newContantInformation!.createdAt,
-      updatedAt: newContantInformation!.updatedAt,
-    },
-  };
+  const userData = returnedUserData(newUser, newContantInformation);
 
-  return returnedUser;
+  return userData;
 };
 
 export default createUserService;

@@ -24,7 +24,7 @@ export class Users {
   @Column()
   password: string;
 
-  @Column()
+  @Column({nullable: true})
   contacts: string;
 
   @OneToMany(

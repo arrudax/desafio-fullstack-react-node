@@ -14,7 +14,9 @@ const createUserController = async (request: Request, response: Response) => {
     contantInformation,
   });
 
-  return response.status(201).json(createdUser);
+  return response
+    .status(201)
+    .json({ message: "Successful user creation", createdUser });
 };
 
 export default createUserController;
