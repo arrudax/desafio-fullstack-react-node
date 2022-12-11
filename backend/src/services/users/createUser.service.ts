@@ -13,11 +13,9 @@ import {
 } from "../../interfaces/users/users.interface";
 import { returnedUserData } from "../../utils/returnedData";
 
-
 const createUserService = async ({
   fullName,
   password,
-  contacts,
   contantInformation,
 }: IUserRequest): Promise<IUserResponse> => {
   const { email, phone } = contantInformation;
@@ -25,19 +23,13 @@ const createUserService = async ({
   const users = await userRepository.find();
   const userExists = users.find((user) => user.fullName === fullName);
 
-  const contantInformations = await contantInformationRepository.find();
-  const contantInformationExists = contantInformations.find(
-    (ele) => ele.phone === phone || ele.email === email
-  );
-
-  if (userExists || contantInformationExists) {
+  if (userExists) {
     throw new AppError(400, "Request data already exists!");
   }
 
   const hashPassword = bcryptjs.hashSync(password, 10);
 
   const newUser = userRepository.create({
-    contacts,
     fullName,
     password: hashPassword,
   });
@@ -45,16 +37,16 @@ const createUserService = async ({
   await userRepository.save(newUser);
 
   const newContantInformation = contantInformationRepository.create({
-    email,
     phone,
+    email,
     users: newUser,
   });
 
   await contantInformationRepository.save(newContantInformation);
 
-  const userData = returnedUserData(newUser, newContantInformation);
+  const returnCreatedUser = returnedUserData(newUser, newContantInformation);
 
-  return userData;
+  return returnCreatedUser;
 };
 
 export default createUserService;

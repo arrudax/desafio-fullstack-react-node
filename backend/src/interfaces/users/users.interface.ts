@@ -1,21 +1,26 @@
 import {
   IContantInformationRequest,
   IContantInformationResponse,
+  IContantInformationUpdateRequest,
 } from "../contantInformation/contantInformation.interface";
 
 export interface IUserRequest {
   fullName: string;
   password: string;
   contantInformation: IContantInformationRequest;
-  contacts?: string;
 }
 
 export interface IUserResponse {
-  id: string
+  id: string;
   fullName: string;
   contantInformation: IContantInformationResponse;
-  contacts?: string;
-  isActive: boolean
-  createdAt: Date
-  updatedAt: Date
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IUserUpdateRequest {
+  fullName?: string;
+  password?: string;
+  contantInformation: IContantInformationUpdateRequest;
 }

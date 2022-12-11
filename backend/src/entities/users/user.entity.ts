@@ -24,15 +24,12 @@ export class Users {
   @Column()
   password: string;
 
-  @Column({nullable: true})
-  contacts: string;
-
   @OneToMany(
     () => ContantInformation,
     (contantInformation) => contantInformation.users,
     { eager: true }
   )
-  contant_information: ContantInformation;
+  contantInformation: ContantInformation;
 
   @Column({ name: "is_active", default: true })
   isActive: boolean;

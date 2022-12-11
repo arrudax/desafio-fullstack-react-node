@@ -21,7 +21,7 @@ export class ContantInformation {
   @Column({ unique: true })
   email: string;
 
-  @ManyToOne(() => Users, (users) => users.contant_information)
+  @ManyToOne(() => Users, (users) => users.contantInformation)
   users: Users;
 
   @CreateDateColumn({ name: "created_at" })
