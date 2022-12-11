@@ -7,12 +7,13 @@ const createUserController = async (
   request: Request,
   response: Response
 ): Promise<Object> => {
-  const { fullName, password, contantInformation }: IUserRequest =
+  const { fullName, password, isAdmin, contantInformation }: IUserRequest =
     request.newUser;
 
   const createdUser = await createUserService({
     fullName,
     password,
+    isAdmin,
     contantInformation,
   });
 

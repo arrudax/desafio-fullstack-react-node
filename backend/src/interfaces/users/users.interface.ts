@@ -7,6 +7,7 @@ import {
 export interface IUserRequest {
   fullName: string;
   password: string;
+  isAdmin?: boolean;
   contantInformation: IContantInformationRequest;
 }
 
@@ -15,6 +16,7 @@ export interface IUserResponse {
   fullName: string;
   contantInformation: IContantInformationResponse;
   isActive: boolean;
+  isAdmin: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

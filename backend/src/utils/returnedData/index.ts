@@ -11,6 +11,7 @@ export function returnedUserData(
     id: user!.id,
     fullName: user!.fullName,
     isActive: user!.isActive,
+    isAdmin: user!.isAdmin,
     createdAt: user!.createdAt,
     updatedAt: user!.updatedAt,
     contantInformation: {

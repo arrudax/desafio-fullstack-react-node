@@ -16,6 +16,7 @@ import { returnedUserData } from "../../utils/returnedData";
 const createUserService = async ({
   fullName,
   password,
+  isAdmin,
   contantInformation,
 }: IUserRequest): Promise<IUserResponse> => {
   const { email, phone } = contantInformation;
@@ -32,6 +33,7 @@ const createUserService = async ({
   const newUser = userRepository.create({
     fullName,
     password: hashPassword,
+    isAdmin: isAdmin ? isAdmin : false,
   });
 
   await userRepository.save(newUser);

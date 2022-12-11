@@ -8,6 +8,7 @@ import {
 export const userRequestSchema: SchemaOf<IUserRequest> = yup.object().shape({
   fullName: yup.string().required(),
   password: yup.string().required(),
+  isAdmin: yup.boolean(),
 
   contantInformation: yup.object().shape({
     email: yup.string().required(),
