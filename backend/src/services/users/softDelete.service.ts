@@ -10,7 +10,8 @@ const softDeleteService = async (userId: string): Promise<void> => {
   }
 
   await userRepository.update(userId, {
-    ...userExists,
+    fullName: userExists.fullName,
+    password: userExists.password,
     isActive: false,
   });
 };
