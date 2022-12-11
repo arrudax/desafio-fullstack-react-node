@@ -2,6 +2,7 @@ import { Router } from "express";
 import createUserController from "../../controllers/users/createUser.controller";
 import listAllUsersController from "../../controllers/users/listAllUsers.controller";
 import retrieveUserController from "../../controllers/users/retrieveUser.controller";
+import softDeleteController from "../../controllers/users/softDelete.controller";
 import updateUserController from "../../controllers/users/updateUser.controller";
 import { handleSchemaUpdateUserMiddleware } from "../../middlewares/schemas/handleSchemaUpdateUser.middlewares";
 import { handleSchemaUserMiddleware } from "../../middlewares/schemas/handleSchemaUser.middlewares";
@@ -26,5 +27,7 @@ userRouter.patch(
   handleSchemaUpdateUserMiddleware(userUpdateRequestSchema),
   updateUserController
 );
+
+userRouter.delete("/:userId", softDeleteController);
 
 export default userRouter;

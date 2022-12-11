@@ -3,7 +3,10 @@ import { IUserRequest } from "../../interfaces/users/users.interface";
 import createUserService from "../../services/users/createUser.service";
 import { instanceToPlain } from "class-transformer";
 
-const createUserController = async (request: Request, response: Response) => {
+const createUserController = async (
+  request: Request,
+  response: Response
+): Promise<Object> => {
   const { fullName, password, contantInformation }: IUserRequest =
     request.newUser;
 

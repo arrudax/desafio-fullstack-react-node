@@ -2,7 +2,10 @@ import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import retrieveUserService from "../../services/users/retrieveUser.service";
 
-const retrieveUserController = async (request: Request, response: Response) => {
+const retrieveUserController = async (
+  request: Request,
+  response: Response
+): Promise<Object> => {
   const { userId } = request.params;
   const retrieveUser = await retrieveUserService(userId);
 
