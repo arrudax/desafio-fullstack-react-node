@@ -26,3 +26,8 @@ export interface IUserUpdateRequest {
   password?: string;
   contantInformation: IContantInformationUpdateRequest;
 }
+
+export interface IUserSession {
+  fullName: string;
+  password: string;
+}

@@ -34,7 +34,6 @@ export const userUpdateRequestSchema: SchemaOf<IUserUpdateRequest> = yup
     password: yup.string(),
 
     contantInformation: yup.object().shape({
-      contantId: yup.string().required(),
       email: yup
         .string()
         .email("your email must contain example domain: email@email.com"),

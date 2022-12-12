@@ -1,4 +1,3 @@
-import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import updateUserService from "../../services/users/updateUser.service";
 
@@ -6,10 +5,11 @@ const updateUserController = async (
   request: Request,
   response: Response
 ): Promise<Object> => {
-  const { userId } = request.params;
+  const { id } = request.user;
+  const { contantId } = request.params;
   const { fullName, password, contantInformation } = request.updateUser;
 
-  await updateUserService(userId, {
+  await updateUserService(id, contantId, {
     fullName,
     password,
     contantInformation,

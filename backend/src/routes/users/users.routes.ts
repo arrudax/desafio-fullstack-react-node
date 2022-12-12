@@ -4,6 +4,8 @@ import listAllUsersController from "../../controllers/users/listAllUsers.control
 import retrieveUserController from "../../controllers/users/retrieveUser.controller";
 import softDeleteController from "../../controllers/users/softDelete.controller";
 import updateUserController from "../../controllers/users/updateUser.controller";
+import adminVerificationMiddleware from "../../middlewares/adminVerification.middleware";
+import handleAuthMiddleware from "../../middlewares/authenticationUser.middleware";
 import { handleSchemaUpdateUserMiddleware } from "../../middlewares/schemas/handleSchemaUpdateUser.middlewares";
 import { handleSchemaUserMiddleware } from "../../middlewares/schemas/handleSchemaUser.middlewares";
 import {
@@ -23,11 +25,17 @@ userRouter.get("", listAllUsersController);
 
 userRouter.get("/:userId", retrieveUserController);
 userRouter.patch(
-  "/:userId",
+  "/:contantId",
   handleSchemaUpdateUserMiddleware(userUpdateRequestSchema),
+  handleAuthMiddleware,
   updateUserController
 );
 
-userRouter.delete("/:userId", softDeleteController);
+userRouter.delete(
+  "/:userId",
+  handleAuthMiddleware,
+  adminVerificationMiddleware,
+  softDeleteController
+);
 
 export default userRouter;

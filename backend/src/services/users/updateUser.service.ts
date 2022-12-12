@@ -1,23 +1,20 @@
 import { AppError } from "../../errors";
-import {
-  IUserUpdateRequest,
-  IUserResponse,
-} from "../../interfaces/users/users.interface";
+import { IUserUpdateRequest } from "../../interfaces/users/users.interface";
 import {
   contantInformationRepository,
   userRepository,
 } from "../../utils/repositories";
 import bcryptjs from "bcryptjs";
-import { returnedUserData } from "../../utils/returnedData";
 
 const updateUserService = async (
-  userId: string,
+  id: string,
+  contantId: string,
   { fullName, password, contantInformation }: IUserUpdateRequest
 ): Promise<void> => {
-  const { email, phone, contantId } = contantInformation!;
+  const { email, phone } = contantInformation!;
 
   const users = await userRepository.find();
-  const userExists = users.find((user) => user.id === userId);
+  const userExists = users.find((user) => user.id === id);
 
   const contants = await contantInformationRepository.find();
   const contantExists = contants.find((contant) => contant.id === contantId);
@@ -27,7 +24,7 @@ const updateUserService = async (
   }
 
   if (phone || email) {
-    await userRepository.update(userId, {
+    await userRepository.update(id, {
       fullName: fullName ? fullName : userExists.fullName,
       password: password
         ? bcryptjs.hashSync(password, 10)
@@ -40,7 +37,7 @@ const updateUserService = async (
     });
   }
 
-  await userRepository.update(userId, {
+  await userRepository.update(id, {
     fullName: fullName ? fullName : userExists.fullName,
     password: password ? bcryptjs.hashSync(password, 10) : userExists.password,
   });

@@ -14,5 +14,4 @@ export interface IContantInformationRequest {
 export interface IContantInformationUpdateRequest {
   email?: string;
   phone?: string;
-  contantId: string;
 }
