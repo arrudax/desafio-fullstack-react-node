@@ -32,7 +32,7 @@ userRouter.patch(
 );
 
 userRouter.delete(
-  "/:userId",
+  "/:targetUserId",
   handleAuthMiddleware,
   adminVerificationMiddleware,
   softDeleteController

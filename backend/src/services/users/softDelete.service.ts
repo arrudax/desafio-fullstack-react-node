@@ -1,17 +1,17 @@
 import { AppError } from "../../errors";
 import { userRepository } from "../../utils/repositories";
 
-const softDeleteService = async (id: string): Promise<void> => {
+const softDeleteService = async (targetUserId: string): Promise<void> => {
   const users = await userRepository.find();
-  const userExists = users.find((user) => user.id === id);
+  const targetUserExists = users.find((user) => user.id === targetUserId);
 
-  if (!userExists) {
+  if (!targetUserExists) {
     throw new AppError(404, "User not found!");
   }
 
-  await userRepository.update(id, {
-    fullName: userExists.fullName,
-    password: userExists.password,
+  await userRepository.update(targetUserId, {
+    fullName: targetUserExists.fullName,
+    password: targetUserExists.password,
     isActive: false,
   });
 };
