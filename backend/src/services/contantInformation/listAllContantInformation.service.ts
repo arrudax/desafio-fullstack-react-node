@@ -1,10 +1,6 @@
 import { ContantInformation } from "../../entities/contantInformation/contantInformation.entity";
 import { Users } from "../../entities/users/user.entity";
-import { AppError } from "../../errors";
-import {
-  contantInformationRepository,
-  userRepository,
-} from "../../utils/repositories";
+import { userRepository } from "../../utils/repositories";
 
 const listAllContantInformationService = async (
   id: string
@@ -15,8 +11,6 @@ const listAllContantInformationService = async (
     .relation(Users, "contantInformation")
     .of(id)
     .loadMany();
-
-  console.log("listContants: ", listContants);
 
   return listContants;
 };
