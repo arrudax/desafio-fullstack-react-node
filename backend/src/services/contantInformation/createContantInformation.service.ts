@@ -13,10 +13,17 @@ const createContantInformationService = async (
   const users = await userRepository.find();
   const userExists = users.find((user) => user.id === id);
 
+  const contants = await contantInformationRepository.find();
+  const phoneExists = contants.find((phoneExist) => phoneExist.phone === phone);
+  const emailExists = contants.find((emailExist) => emailExist.email === email);
+
   if (!userExists) {
     throw new AppError(404, "User not found!");
   }
 
+  if (phoneExists || emailExists) {
+    throw new AppError(409, "Request data already exists!");
+  }
   const newContantInformation = contantInformationRepository.create({
     phone,
     email,

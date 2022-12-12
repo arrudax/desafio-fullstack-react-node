@@ -25,7 +25,7 @@ const createUserService = async ({
   const userExists = users.find((user) => user.fullName === fullName);
 
   if (userExists) {
-    throw new AppError(400, "Request data already exists!");
+    throw new AppError(409, "Request data already exists!");
   }
 
   const hashPassword = bcryptjs.hashSync(password, 10);

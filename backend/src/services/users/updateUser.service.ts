@@ -19,10 +19,19 @@ const updateUserService = async (
   const contants = await contantInformationRepository.find();
   const contantExists = contants.find((contant) => contant.id === contantId);
 
+  const phoneExists = contants.find((phoneExist) => phoneExist.phone === phone);
+  const emailExists = contants.find((emailExist) => emailExist.email === email);
+  const fullNameExists = users.find(
+    (fullNameExist) => fullNameExist.fullName === fullName
+  );
+
   if (!contantExists || !userExists) {
     throw new AppError(404, "User information not found");
   }
 
+  if (phoneExists || emailExists || fullNameExists) {
+    throw new AppError(409, "Request data already exists!");
+  }
   if (phone || email) {
     await userRepository.update(id, {
       fullName: fullName ? fullName : userExists.fullName,
