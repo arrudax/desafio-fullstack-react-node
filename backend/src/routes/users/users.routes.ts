@@ -25,8 +25,8 @@ userRouter.post(
 userRouter.get(
   "",
   handleAuthMiddleware,
-  softDeleteVerificationMiddleware,
   adminVerificationMiddleware,
+  softDeleteVerificationMiddleware,
   listAllUsersController
 );
 

@@ -9,7 +9,7 @@ const softDeleteVerificationMiddleware = async (
 ) => {
   const deletedUser = request.user.isActive;
 
-  if (deletedUser === false) {
+  if (!deletedUser) {
     throw new AppError(401, "User does not exist or has been deleted");
   }
   next();
