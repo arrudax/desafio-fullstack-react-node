@@ -8,7 +8,7 @@ const listAllUsersController = async (
 ): Promise<Object> => {
   const listUsers = await listAllUsersService();
 
-  return response.status(201).json(instanceToPlain(listUsers));
+  return response.status(200).json(instanceToPlain(listUsers));
 };
 
 export default listAllUsersController;

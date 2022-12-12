@@ -1,4 +1,5 @@
 import * as express from "express";
+import { IContantInformationRequest } from "../../interfaces/contantInformation/contantInformation.interface";
 import {
   IUserRequest,
   IUserSession,
@@ -16,6 +17,7 @@ declare global {
       newUser: IUserRequest;
       updateUser: IUserUpdateRequest;
       session: IUserSession;
+      newContantInformation: IContantInformationRequest;
     }
   }
 }

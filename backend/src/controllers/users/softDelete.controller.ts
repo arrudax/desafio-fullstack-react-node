@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import softDeleteService from "../../services/users/softDelete.service";
 
-const softDeleteController = async (request: Request, response: Response) => {
+const softDeleteController = async (
+  request: Request,
+  response: Response
+): Promise<any> => {
   const { targetUserId } = request.params;
 
   await softDeleteService(targetUserId);

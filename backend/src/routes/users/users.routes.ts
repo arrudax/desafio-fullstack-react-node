@@ -8,6 +8,7 @@ import adminVerificationMiddleware from "../../middlewares/adminVerification.mid
 import handleAuthMiddleware from "../../middlewares/authenticationUser.middleware";
 import { handleSchemaUpdateUserMiddleware } from "../../middlewares/schemas/handleSchemaUpdateUser.middlewares";
 import { handleSchemaUserMiddleware } from "../../middlewares/schemas/handleSchemaUser.middlewares";
+import softDeleteVerificationMiddleware from "../../middlewares/softDeleteVerification.middleware";
 import {
   userRequestSchema,
   userUpdateRequestSchema,
@@ -21,19 +22,32 @@ userRouter.post(
   createUserController
 );
 
-userRouter.get("", listAllUsersController);
+userRouter.get(
+  "",
+  handleAuthMiddleware,
+  softDeleteVerificationMiddleware,
+  adminVerificationMiddleware,
+  listAllUsersController
+);
 
-userRouter.get("/:userId", retrieveUserController);
+userRouter.get(
+  "/myaccount/",
+  handleAuthMiddleware,
+  softDeleteVerificationMiddleware,
+  retrieveUserController
+);
 userRouter.patch(
   "/:contantId",
   handleSchemaUpdateUserMiddleware(userUpdateRequestSchema),
   handleAuthMiddleware,
+  softDeleteVerificationMiddleware,
   updateUserController
 );
 
 userRouter.delete(
   "/:targetUserId",
   handleAuthMiddleware,
+  softDeleteVerificationMiddleware,
   adminVerificationMiddleware,
   softDeleteController
 );

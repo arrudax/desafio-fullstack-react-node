@@ -6,8 +6,8 @@ const retrieveUserController = async (
   request: Request,
   response: Response
 ): Promise<Object> => {
-  const { userId } = request.params;
-  const retrieveUser = await retrieveUserService(userId);
+  const { id } = request.user;
+  const retrieveUser = await retrieveUserService(id);
 
   return response.status(200).json(instanceToPlain(retrieveUser));
 };
